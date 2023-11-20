@@ -2,18 +2,21 @@
 @tailwind components;
 @tailwind utilities; */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 body {
-  font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
     --primary-color: #19375b;
     --secondary-color: #5758bd;
 
-    --hover-color: #C3C3C3;
-    
+    --hover-color: #c3c3c3;
+
     --dark-color: #040011;
     --light-color: #d4f4f8;
     --white-color: #ffffff;
@@ -23,4 +26,3 @@ body {
     --warning-color: #e2c900;
     --danger-color: #f20d00;
 }
-
