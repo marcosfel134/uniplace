@@ -69,7 +69,7 @@ export default function Login({ status, canResetPassword }) {
             )}
 
             <Box noValidate component="form" onSubmit={onSubmit}>
-                <Grid container spacing={0} rowGap={3}>
+                <Grid container spacing={0} rowGap={2}>
                     <Grid item xs={12}>
                         <TextField
                             id="email"
@@ -116,7 +116,8 @@ export default function Login({ status, canResetPassword }) {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}
+                    >
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -130,18 +131,6 @@ export default function Login({ status, canResetPassword }) {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Link href={route("register")}>Criar conta</Link>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        {canResetPassword && (
-                            <Link href={route("password.request")}>
-                                Esqueci minha senha
-                            </Link>
-                        )}
-                    </Grid>
-
-                    <Grid item xs={12}>
                         <Button
                             variant="contained"
                             type="submit"
@@ -150,9 +139,31 @@ export default function Login({ status, canResetPassword }) {
                             fullWidth
                             endIcon={processing && <Loading />}
                         >
-                            Entrar
+                            {!processing && "Entrar"}
                         </Button>
                     </Grid>
+
+                    <Grid item xs={12}
+                        display={"flex"}
+                        alignItems={'center'}
+                        justifyContent={'center'}
+                    >
+                        {canResetPassword && (
+                            <Link href={route("password.request")}>
+                                Esqueci minha senha
+                            </Link>
+                        )}
+                    </Grid>
+
+                    <Grid item xs={12}
+                         display={"flex"}
+                         alignItems={'center'}
+                         justifyContent={'center'}
+                    >
+                        <Link href={route("register")}>Criar conta</Link>
+                    </Grid>
+
+
                 </Grid>
             </Box>
         </GuestLayout>

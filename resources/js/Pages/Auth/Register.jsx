@@ -41,7 +41,7 @@ export default function Register() {
             <Head title="Cadastrar" />
 
             <Box noValidate component="form" onSubmit={submit}>
-                <Grid container spacing={0} rowGap={3}>
+                <Grid container spacing={0} rowGap={2}>
                     <Grid item xs={12}>
                         <TextField
                             id="name"
@@ -100,9 +100,7 @@ export default function Register() {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <Link href={route("login")}>Entrar em minha conta</Link>
-                    </Grid>
+
                     <Grid item xs={12}>
                         <Button
                             variant="contained"
@@ -112,8 +110,15 @@ export default function Register() {
                             fullWidth
                             endIcon={processing && <Loading />}
                         >
-                            Cadastrar
+                            {!processing && "Cadastrar"}
                         </Button>
+                    </Grid>                    
+                    <Grid item xs={12} 
+                         display={"flex"}
+                         alignItems={'center'}
+                         justifyContent={'center'}
+                         >
+                        <Link href={route("login")} >Entrar em minha conta</Link>
                     </Grid>
                 </Grid>
             </Box>
