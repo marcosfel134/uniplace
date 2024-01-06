@@ -101,7 +101,7 @@ export default function Register() {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Link href={route("login")}>Já sou cadastrado</Link>
+                        <Link href={route("login")}>Entrar em minha conta</Link>
                     </Grid>
                     <Grid item xs={12}>
                         <Button

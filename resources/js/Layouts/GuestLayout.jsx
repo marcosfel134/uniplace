@@ -1,6 +1,7 @@
 // import ApplicationLogo from '@/Components/ApplicationLogo';
 import * as React from "react";
 import Box from "@mui/system/Box";
+import Typography from "@mui/material/Typography";
 // import { Link } from "@inertiajs/react";
 
 export default function Guest({ children }) {
@@ -8,7 +9,7 @@ export default function Guest({ children }) {
         <Box
             component="section"
             sx={{
-                height: "100vh",
+                height: "80vh",
                 maxWidth: "550px",
                 margin: "0 auto",
                 display: "flex",
@@ -19,7 +20,22 @@ export default function Guest({ children }) {
                 p: 2,
             }}
         >
-            <div>Uniplace</div>
+            <Typography
+                // variant="h6"
+                // component="a"
+                noWrap
+                sx={{
+                    my: 2,
+                    fontWeight: 700,
+                    fontFamily: "monospace",
+                    fontSize: 36,
+                    letterSpacing: "0",
+                    color: "var(--primary-color)",
+                    textDecoration: "none",
+                }}
+            >
+                /logo/
+            </Typography>
 
             <div>{children}</div>
         </Box>

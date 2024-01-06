@@ -2,7 +2,7 @@ const MuiThemeMod = {
 
     palette: {
         primary : {
-            main: "#19375b",
+            main: "#1d105e",
         },
         success : {
             main: "#00a059",
@@ -24,6 +24,8 @@ const MuiThemeMod = {
                         "color": "var(--white-color)",
                         "background": "var(--hover-color)",
                     },
+                    textTransform: "none",
+                    fontSize: 16
                 },
             }
         },

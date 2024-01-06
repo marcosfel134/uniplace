@@ -20,7 +20,7 @@ import MenuItem from "@mui/material/MenuItem";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
 export default function Authenticated({ user, children }) {
-    const pages = ["Teste", "Teste", "Teste"];
+    const pages = ["Testea", "Testeb", "Testec"];
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -40,34 +40,29 @@ export default function Authenticated({ user, children }) {
         setAnchorElUser(null);
     };
 
-    console.log(user);
-
     return (
         <>
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <StorefrontIcon
-                            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-                        />
-
                         <Typography
                             variant="h6"
                             noWrap
                             component="a"
                             href={route("dashboard")}
-                            active={route().current("dashboard")}
+                            // active={route().current("dashboard")}
                             sx={{
                                 mr: 2,
                                 display: { xs: "none", md: "flex" },
                                 fontWeight: 700,
-                                fontSize: 16,
-                                letterSpacing: ".2rem",
-                                color: "inherit",
+                                fontFamily: "monospace",
+                                fontSize: 26,
+                                letterSpacing: "0",
+                                color: "var(--light-color)",
                                 textDecoration: "none",
                             }}
                         >
-                            Uniplace
+                            UNIPLACE
                         </Typography>
 
                         <Box
@@ -128,12 +123,12 @@ export default function Authenticated({ user, children }) {
                                 flexGrow: 1,
                                 fontFamily: "monospace",
                                 fontWeight: 700,
-                                letterSpacing: ".3rem",
-                                color: "inherit",
+                                letterSpacing: "0",
+                                color: "var(--light-color)",
                                 textDecoration: "none",
                             }}
                         >
-                            Uniplace
+                            UNIPLACE
                         </Typography>
                         <Box
                             sx={{

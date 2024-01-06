@@ -1,40 +1,62 @@
-import { useEffect } from "react";
-import { Head, useForm } from "@inertiajs/react";
-import GuestLayout from "@/Layouts/GuestLayout";
 // import InputError from "@/Components/InputError";
 // import InputLabel from "@/Components/InputLabel";
 // import PrimaryButton from "@/Components/PrimaryButton";
 // import TextInput from "@/Components/TextInput";
 // import Checkbox from "@/Components/Checkbox";
 // import { Link } from "@inertiajs/react";
-
+import React, { useState, useEffect } from "react";
+import { Head, useForm } from "@inertiajs/react";
+import GuestLayout from "@/Layouts/GuestLayout";
 import Box from "@mui/system/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Loading from "@/Components/Loading";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
 
 export default function Login({ status, canResetPassword }) {
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
         remember: false,
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setData(name, value);
+    };
+
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+        setData(name, checked);
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        post(route("login"));
+    };
+
     useEffect(() => {
         return () => {
             reset("password");
         };
     }, []);
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route("login"));
-    };
 
     return (
         <GuestLayout>
@@ -46,7 +68,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
             )}
 
-            <Box noValidate component="form" onSubmit={submit}>
+            <Box noValidate component="form" onSubmit={onSubmit}>
                 <Grid container spacing={0} rowGap={3}>
                     <Grid item xs={12}>
                         <TextField
@@ -55,7 +77,7 @@ export default function Login({ status, canResetPassword }) {
                             label="E-mail"
                             variant="outlined"
                             value={data.email}
-                            onChange={(e) => setData("email", e.target.value)}
+                            onChange={handleChange}
                             error={errors.email}
                             helperText={errors.email}
                             fullWidth
@@ -67,11 +89,28 @@ export default function Login({ status, canResetPassword }) {
                             name="password"
                             label="Senha"
                             variant="outlined"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={
+                                                handleMouseDownPassword
+                                            }
+                                        >
+                                            {showPassword ? (
+                                                <VisibilityOff />
+                                            ) : (
+                                                <Visibility />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
                             value={data.password}
-                            onChange={(e) =>
-                                setData("password", e.target.value)
-                            }
+                            onChange={handleChange}
                             error={errors.password}
                             helperText={errors.password}
                             fullWidth
@@ -83,14 +122,17 @@ export default function Login({ status, canResetPassword }) {
                                 <Checkbox
                                     checked={data.remember}
                                     name="remember"
-                                    onChange={(e) =>
-                                        setData("remember", e.target.checked)
-                                    }
+                                    onChange={handleCheckboxChange}
                                 />
                             }
                             label="Lembrar de mim"
                         />
                     </Grid>
+
+                    <Grid item xs={12}>
+                        <Link href={route("register")}>Criar conta</Link>
+                    </Grid>
+
                     <Grid item xs={12}>
                         {canResetPassword && (
                             <Link href={route("password.request")}>
@@ -106,7 +148,7 @@ export default function Login({ status, canResetPassword }) {
                             disabled={processing}
                             disableElevation
                             fullWidth
-                            endIcon={processing && <Loading/>}
+                            endIcon={processing && <Loading />}
                         >
                             Entrar
                         </Button>
