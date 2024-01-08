@@ -16,25 +16,35 @@ export default function Guest({ children }) {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: 2,
                 p: 2,
             }}
         >
             <Typography
-                // variant="h6"
-                // component="a"
                 noWrap
                 sx={{
-                    my: 2,
-                    fontWeight: 700,
-                    fontFamily: "monospace",
-                    fontSize: 36,
-                    letterSpacing: "0",
-                    color: "var(--primary-color)",
+                    m: 0,
+                    fontWeight: 300,
+                    fontSize: 32,
+                    letterSpacing: ".2rem",
+                    color: "var(--dark-color)",
                     textDecoration: "none",
                 }}
             >
-                /logo/
+                Uniplace
+            </Typography>
+
+            <Typography
+                noWrap
+                sx={{
+                    mb: 2,
+                    fontWeight: 300,
+                    fontSize: 20,
+                    letterSpacing: ".2rem",
+                    color: "var(--dark-color)",
+                    textDecoration: "none",
+                }}
+            >
+                Marketplace universitário
             </Typography>
 
             <div>{children}</div>

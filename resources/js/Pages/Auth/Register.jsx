@@ -1,3 +1,5 @@
+// import { Link } from '@inertiajs/react';
+
 import { useEffect } from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
@@ -5,8 +7,6 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, useForm } from "@inertiajs/react";
-// import { Link } from '@inertiajs/react';
-
 import Box from "@mui/system/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -16,7 +16,10 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Loading from "@/Components/Loading";
 
-export default function Register() {
+export default function Register({universities}) {
+
+    console.log(universities);
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
@@ -118,7 +121,7 @@ export default function Register() {
                          alignItems={'center'}
                          justifyContent={'center'}
                          >
-                        <Link href={route("login")} >Entrar em minha conta</Link>
+                        <Link href={route("login")} >Fazer login</Link>
                     </Grid>
                 </Grid>
             </Box>

@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "start": "concurrently \"npm run dev\" \"php artisan serve\""
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
@@ -24,6 +25,7 @@
         "@emotion/styled": "^11.11.0",
         "@fontsource/roboto": "^5.0.8",
         "@mui/icons-material": "^5.14.18",
-        "@mui/material": "^5.14.18"
+        "@mui/material": "^5.14.18",
+        "concurrently": "^8.2.2"
     }
 }

@@ -14,9 +14,15 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password'
+        ]);
+
+        \App\Models\University::create([
+            'name' => 'Fatec Guaratinguetá - Prof. João Mod',
+            'cnpj' => '62.823.257/0001-09',
+        ]);
     }
 }

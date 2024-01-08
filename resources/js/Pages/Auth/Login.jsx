@@ -12,29 +12,17 @@ import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Loading from "@/Components/Loading";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import InputAdornment from "@mui/material/InputAdornment";
 
 export default function Login({ status, canResetPassword }) {
-
+    
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
         remember: false,
     });
-
-    const [showPassword, setShowPassword] = useState(false);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -89,26 +77,7 @@ export default function Login({ status, canResetPassword }) {
                             name="password"
                             label="Senha"
                             variant="outlined"
-                            type={showPassword ? "text" : "password"}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={
-                                                handleMouseDownPassword
-                                            }
-                                        >
-                                            {showPassword ? (
-                                                <VisibilityOff />
-                                            ) : (
-                                                <Visibility />
-                                            )}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            }}
+                            type={"password"}
                             value={data.password}
                             onChange={handleChange}
                             error={errors.password}
@@ -116,8 +85,8 @@ export default function Login({ status, canResetPassword }) {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={4}
-                    >
+
+                    <Grid item xs={6}>
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -128,6 +97,20 @@ export default function Login({ status, canResetPassword }) {
                             }
                             label="Lembrar de mim"
                         />
+                    </Grid>
+
+                    <Grid
+                        item
+                        xs={6}
+                        display={"flex"}
+                        alignItems={"center"}
+                        justifyContent={"end"}
+                    >
+                        {canResetPassword && (
+                            <Link href={route("password.request")}>
+                                Esqueci minha senha
+                            </Link>
+                        )}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -143,27 +126,15 @@ export default function Login({ status, canResetPassword }) {
                         </Button>
                     </Grid>
 
-                    <Grid item xs={12}
+                    <Grid
+                        item
+                        xs={12}
                         display={"flex"}
-                        alignItems={'center'}
-                        justifyContent={'center'}
-                    >
-                        {canResetPassword && (
-                            <Link href={route("password.request")}>
-                                Esqueci minha senha
-                            </Link>
-                        )}
-                    </Grid>
-
-                    <Grid item xs={12}
-                         display={"flex"}
-                         alignItems={'center'}
-                         justifyContent={'center'}
+                        alignItems={"center"}
+                        justifyContent={"center"}
                     >
                         <Link href={route("register")}>Criar conta</Link>
                     </Grid>
-
-
                 </Grid>
             </Box>
         </GuestLayout>
