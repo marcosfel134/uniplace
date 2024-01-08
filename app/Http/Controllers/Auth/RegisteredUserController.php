@@ -15,6 +15,8 @@ use Inertia\Response;
 
 use App\Models\User;
 use App\Models\University;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmailNotification;
 
 class RegisteredUserController extends Controller
 {
@@ -47,8 +49,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
-
+        // event(new Registered($user));
+        if ($user){
+            Mail::to($user->email)->send(new VerifyEmailNotification($user));
+        }
+        
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);

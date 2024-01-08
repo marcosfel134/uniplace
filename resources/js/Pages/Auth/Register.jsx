@@ -18,8 +18,6 @@ import Loading from "@/Components/Loading";
 
 export default function Register({universities}) {
 
-    console.log(universities);
-
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
