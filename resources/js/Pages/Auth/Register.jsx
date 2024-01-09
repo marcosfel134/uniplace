@@ -1,6 +1,6 @@
 // import { Link } from '@inertiajs/react';
-
 import { useEffect } from "react";
+import { useState } from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
@@ -15,6 +15,13 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Loading from "@/Components/Loading";
+import * as React from 'react';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 export default function Register({universities}) {
 
@@ -23,7 +30,11 @@ export default function Register({universities}) {
         email: "",
         password: "",
         password_confirmation: "",
+        is_student: false,
+        university: "",
     });
+
+    const [showUniversitySelect, setShowUniversitySelect] = useState(false);
 
     useEffect(() => {
         return () => {
@@ -31,16 +42,27 @@ export default function Register({universities}) {
         };
     }, []);
 
+    useEffect(()=>{
+        if(data.is_student){
+            setShowUniversitySelect(true)
+        }else{
+            setShowUniversitySelect(false)
+        };
+    },[data.is_student]);
+
     const submit = (e) => {
         e.preventDefault();
-
         post(route("register"));
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setData(name, value);
     };
 
     return (
         <GuestLayout>
             <Head title="Cadastrar" />
-
             <Box noValidate component="form" onSubmit={submit}>
                 <Grid container spacing={0} rowGap={2}>
                     <Grid item xs={12}>
@@ -50,7 +72,7 @@ export default function Register({universities}) {
                             label="Nome"
                             variant="outlined"
                             value={data.name}
-                            onChange={(e) => setData("name", e.target.value)}
+                            onChange={handleChange}
                             error={errors.name}
                             helperText={errors.name}
                             fullWidth
@@ -63,7 +85,7 @@ export default function Register({universities}) {
                             label="E-mail"
                             variant="outlined"
                             value={data.email}
-                            onChange={(e) => setData("email", e.target.value)}
+                            onChange={handleChange}
                             error={errors.email}
                             helperText={errors.email}
                             fullWidth
@@ -77,9 +99,7 @@ export default function Register({universities}) {
                             variant="outlined"
                             type="password"
                             value={data.password}
-                            onChange={(e) =>
-                                setData("password", e.target.value)
-                            }
+                            onChange={handleChange}
                             error={errors.password}
                             helperText={errors.password}
                             fullWidth
@@ -93,15 +113,48 @@ export default function Register({universities}) {
                             variant="outlined"
                             type="password"
                             value={data.password_confirmation}
-                            onChange={(e) =>
-                                setData("password_confirmation", e.target.value)
-                            }
+                            onChange={handleChange}
                             error={errors.password_confirmation}
                             helperText={errors.password_confirmation}
                             fullWidth
                         />
                     </Grid>
-
+                    <Grid item xs={12}>
+                        <FormControl>
+                            <FormLabel id="demo-row-radio-buttons-group-label">Você é estudante?</FormLabel>
+                            <RadioGroup
+                                row
+                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                name="is_student"
+                                value={data.is_student}
+                                onChange={handleChange}
+                                >
+                                <FormControlLabel value={true} control={<Radio />} label="Sim" onChange={handleChange}  />
+                                <FormControlLabel value={false} control={<Radio />} label="Não" onChange={handleChange} />
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
+                    {showUniversitySelect && (
+                        <Grid item xs={12}>
+                            <FormControl fullWidth>
+                                <InputLabel id="university-label">Selecione sua universidade</InputLabel>
+                                <Select
+                                    labelId="university-label"
+                                    id="university"
+                                    name="university"
+                                    value={data.university}
+                                    onChange={handleChange}
+                                    fullWidth
+                                >
+                                    {universities.map((uni) => (
+                                        <MenuItem key={uni.id} value={uni.id}>
+                                            {uni.name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                    )}
                     <Grid item xs={12}>
                         <Button
                             variant="contained"

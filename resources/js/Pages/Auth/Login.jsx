@@ -15,6 +15,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Loading from "@/Components/Loading";
+import SignatureCard from "../../Components/Card/SignatureCard";
 
 export default function Login({ status, canResetPassword }) {
     
@@ -136,6 +137,12 @@ export default function Login({ status, canResetPassword }) {
                         <Link href={route("register")}>Criar conta</Link>
                     </Grid>
                 </Grid>
+                <SignatureCard
+                    name="Simples"
+                    description="Plano destinado a um vendedor iniciante da faculdade FATEC GT"
+                    price="14,98"
+                    benefits="5,000"
+                />
             </Box>
         </GuestLayout>
     );
