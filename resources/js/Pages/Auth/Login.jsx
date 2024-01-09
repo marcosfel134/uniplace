@@ -1,12 +1,7 @@
-// import InputError from "@/Components/InputError";
-// import InputLabel from "@/Components/InputLabel";
-// import PrimaryButton from "@/Components/PrimaryButton";
-// import TextInput from "@/Components/TextInput";
-// import Checkbox from "@/Components/Checkbox";
-// import { Link } from "@inertiajs/react";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Head, useForm } from "@inertiajs/react";
 import GuestLayout from "@/Layouts/GuestLayout";
+
 import Box from "@mui/system/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -14,8 +9,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import Loading from "@/Components/Loading";
-import SignatureCard from "../../Components/Card/SignatureCard";
 
 export default function Login({ status, canResetPassword }) {
     
@@ -121,9 +114,8 @@ export default function Login({ status, canResetPassword }) {
                             disabled={processing}
                             disableElevation
                             fullWidth
-                            endIcon={processing && <Loading />}
                         >
-                            {!processing && "Entrar"}
+                            Entrar
                         </Button>
                     </Grid>
 
@@ -137,12 +129,6 @@ export default function Login({ status, canResetPassword }) {
                         <Link href={route("register")}>Criar conta</Link>
                     </Grid>
                 </Grid>
-                <SignatureCard
-                    name="Simples"
-                    description="Plano destinado a um vendedor iniciante da faculdade FATEC GT"
-                    price="14,98"
-                    benefits="5,000"
-                />
             </Box>
         </GuestLayout>
     );

@@ -1,25 +1,21 @@
-import Link from "@mui/material/Link";
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, useForm } from '@inertiajs/react';
+import GuestLayout from "@/Layouts/GuestLayout";
+import { Head, useForm } from "@inertiajs/react";
+
 import Box from "@mui/system/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import { Typography } from '@mui/material';
+import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Loading from "@/Components/Loading";
 
 export default function ForgotPassword({ status }) {
     
     const { data, setData, post, processing, errors } = useForm({
-        email: '',
+        email: "",
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route('password.email'));
+        post(route("password.email"));
     };
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -29,12 +25,21 @@ export default function ForgotPassword({ status }) {
     return (
         <GuestLayout>
             <Head title="Esqueci minha senha" />
-            <Box noValidate component="form" sx={{ width: '100%' }} onSubmit={onSubmit}>
-                <Typography sx={{mb: 2}}>
-                    Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de e-mail e enviaremos uma senha por e-mail
-                    link de redefinição que permitirá que você escolha um novo.
-                </Typography>
+            <Box
+                noValidate
+                component="form"
+                sx={{ width: "100%" }}
+                onSubmit={onSubmit}
+            >
                 <Grid container spacing={0} rowGap={2}>
+                    <Grid item xs={12}>
+                        <Typography>
+                            Esqueceu sua senha? Sem problemas. Basta nos
+                            informar seu endereço de e-mail e enviaremos uma
+                            senha por e-mail link de redefinição que permitirá
+                            que você escolha um novo.
+                        </Typography>
+                    </Grid>
                     <Grid item xs={12}>
                         <TextField
                             id="email"
@@ -47,13 +52,14 @@ export default function ForgotPassword({ status }) {
                             helperText={errors.email}
                             fullWidth
                         />
-                    </Grid>                  
-                    <Grid item xs={12} 
-                        display={"flex"}
-                        alignItems={'center'}
-                        justifyContent={'center'}
-                        >
                     </Grid>
+                    <Grid
+                        item
+                        xs={12}
+                        display={"flex"}
+                        alignItems={"center"}
+                        justifyContent={"center"}
+                    ></Grid>
                     <Grid item xs={12}>
                         <Button
                             variant="contained"
@@ -61,13 +67,12 @@ export default function ForgotPassword({ status }) {
                             disabled={processing}
                             disableElevation
                             fullWidth
-                            endIcon={processing && <Loading />}
                         >
-                            {!processing && "Entrar"}
+                            Confirmar
                         </Button>
                     </Grid>
                 </Grid>
             </Box>
-    </GuestLayout>
+        </GuestLayout>
     );
 }

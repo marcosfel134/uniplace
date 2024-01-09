@@ -1,30 +1,24 @@
 // import { Link } from '@inertiajs/react';
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
 import { Head, useForm } from "@inertiajs/react";
+
 import Box from "@mui/system/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import Loading from "@/Components/Loading";
-import * as React from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
 
-export default function Register({universities}) {
-
+export default function Register({ universities }) {
+    
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
@@ -42,13 +36,13 @@ export default function Register({universities}) {
         };
     }, []);
 
-    useEffect(()=>{
-        if(data.is_student){
-            setShowUniversitySelect(true)
-        }else{
-            setShowUniversitySelect(false)
-        };
-    },[data.is_student]);
+    useEffect(() => {
+        if (data.is_student) {
+            setShowUniversitySelect(true);
+        } else {
+            setShowUniversitySelect(false);
+        }
+    }, [data.is_student]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -59,6 +53,12 @@ export default function Register({universities}) {
         const { name, value } = event.target;
         setData(name, value);
     };
+
+    const handleRadioChange = (event) => {
+        const { name } = event.target;
+        const value = event.target.value === 'true';
+        setData(name, value);
+    };    
 
     return (
         <GuestLayout>
@@ -121,30 +121,42 @@ export default function Register({universities}) {
                     </Grid>
                     <Grid item xs={12}>
                         <FormControl>
-                            <FormLabel id="demo-row-radio-buttons-group-label">Você é estudante?</FormLabel>
+                            <FormLabel id="demo-row-radio-buttons-group-label">
+                                Você é estudante?
+                            </FormLabel>
                             <RadioGroup
                                 row
                                 aria-labelledby="demo-row-radio-buttons-group-label"
                                 name="is_student"
                                 value={data.is_student}
-                                onChange={handleChange}
-                                >
-                                <FormControlLabel value={true} control={<Radio />} label="Sim" onChange={handleChange}  />
-                                <FormControlLabel value={false} control={<Radio />} label="Não" onChange={handleChange} />
+                                onChange={handleRadioChange}
+                            >
+                                <FormControlLabel
+                                    value={true}
+                                    control={<Radio />}
+                                    label="Sim"
+                                />
+                                <FormControlLabel
+                                    value={false}
+                                    control={<Radio />}
+                                    label="Não"
+                                />
                             </RadioGroup>
                         </FormControl>
                     </Grid>
                     {showUniversitySelect && (
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel id="university-label">Selecione sua universidade</InputLabel>
+                                <InputLabel id="university-label">
+                                    Selecione sua universidade
+                                </InputLabel>
                                 <Select
                                     labelId="university-label"
                                     id="university"
                                     name="university"
+                                    label="Selecione sua universidade"
                                     value={data.university}
                                     onChange={handleChange}
-                                    fullWidth
                                 >
                                     {universities.map((uni) => (
                                         <MenuItem key={uni.id} value={uni.id}>
@@ -162,17 +174,18 @@ export default function Register({universities}) {
                             disabled={processing}
                             disableElevation
                             fullWidth
-                            endIcon={processing && <Loading />}
                         >
-                            {!processing && "Cadastrar"}
+                            Cadastrar
                         </Button>
-                    </Grid>                    
-                    <Grid item xs={12} 
-                         display={"flex"}
-                         alignItems={'center'}
-                         justifyContent={'center'}
-                         >
-                        <Link href={route("login")} >Fazer login</Link>
+                    </Grid>
+                    <Grid
+                        item
+                        xs={12}
+                        display={"flex"}
+                        alignItems={"center"}
+                        justifyContent={"center"}
+                    >
+                        <Link href={route("login")}>Fazer login</Link>
                     </Grid>
                 </Grid>
             </Box>
